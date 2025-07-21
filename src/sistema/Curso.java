@@ -127,10 +127,11 @@ public class Curso {
 		try {
 			if (!estudiantesInscritos.contains(estudiante)) {
 				estudiantesInscritos.add(estudiante);
+				return true;
 			} else {
 				System.out.println("El estudiante ya esta inscrito en el curso.");
+				return false;
 			}
-			return true;
 		} catch (Exception e) {
 			System.out.println("No se pudo agregar al estudiante");
 			return false;
@@ -156,13 +157,20 @@ public class Curso {
 		if (estudiantesInscritos.isEmpty()) {
 			return 0.0;
 		}
-
-		double sumaPromedios = 0.0;
-		for (Estudiante estudiante : estudiantesInscritos) {
-			sumaPromedios += estudiante.getPromedioGeneral();
+		
+		double sumaNotas = 0.0;
+		int cantidadNotas = 0;
+		for (Evaluacion evaluacion : evaluaciones) {
+			for (Double nota : evaluacion.getCalificaciones().values()) {
+				sumaNotas += nota;
+				cantidadNotas++;
+			}
+		}
+		if (cantidadNotas == 0) {
+			return 0.0;
 		}
 
-		return sumaPromedios / estudiantesInscritos.size();
+		return sumaNotas / cantidadNotas;
 	}
 
 	/**

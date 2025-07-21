@@ -308,59 +308,115 @@ public class SistemaAcademico {
 	 * Inscribe un estudiante en un curso, validando RUT y disponibilidad.
 	 * Crea una instancia de inscripción y la agrega a las listas correspondientes.
 	 */
+//	public static void inscribirEstudianteEnCurso() {
+//
+//		System.out.printf("Ingresar inscripción.\n");
+//		String cursoIngresado = seleccionarCurso();
+//		System.out.println("Ingrese el RUT del estudiante: ");
+//		String rutEstudiante = sc.nextLine();
+//		if (!validarRut(rutEstudiante)) {
+//			System.out.println("⚠️ RUT ingresado es invalido.");
+//			return;
+//		}
+//		boolean estudianteEncontrado = false;
+//		Estudiante estudiante = new Estudiante();
+//		for (Estudiante estudiante1 : estudiantes) {
+//			if (estudiante1.getRut().equalsIgnoreCase(rutEstudiante)) {
+//				estudianteEncontrado = true;
+//				estudiante = estudiante1;
+//			}
+//		}
+//		if (!estudianteEncontrado) {
+//			System.out.println("Estudiantes no encontrado. Debe registrarse.");
+//			return;
+//		}
+//
+//		if (estudiante == null || cursoIngresado == null
+//				|| cursoIngresado.isEmpty()) {
+//			System.out.println(
+//					"Estudiante o curso no válidos. Intente nuevamente.");
+//			return;
+//		}
+//		final String cursoFinal = cursoIngresado; // Lambda pedia una constante
+//		if (estudiante.getCursos().stream()
+//				.anyMatch(e -> e.getNombre().equals(cursoFinal))) {
+//			System.out.println(
+//					"Estudiante ya inscrito en el curso: " + cursoIngresado);
+//			return;
+//		} else {
+//			boolean cursoEncontrado = false;
+//			for (Curso curso : cursos) {
+//				if (curso.getNombre().equals(cursoIngresado)) {
+//					curso.inscribirEstudiante(estudiante);
+//					estudiante.getCursos().add(curso);
+//					Inscripcion nuevaInscripcion = new Inscripcion(estudiante,
+//							curso, LocalDate.now().toString());
+//					inscripciones.add(nuevaInscripcion);
+//					curso.inscribirEstudiante(estudiante);
+//					estudiante.agregarInscripcion(nuevaInscripcion);
+//					cursoEncontrado = true;
+//					System.out.println("Inscripción exitosa en el curso: "
+//							+ cursoIngresado);
+//					return;
+//				}
+//			}
+//		}
+//
+//	}
 	public static void inscribirEstudianteEnCurso() {
 
 		System.out.printf("Ingresar inscripción.\n");
 		String cursoIngresado = seleccionarCurso();
+
 		System.out.println("Ingrese el RUT del estudiante: ");
 		String rutEstudiante = sc.nextLine();
+
 		if (!validarRut(rutEstudiante)) {
 			System.out.println("⚠️ RUT ingresado es invalido.");
 			return;
 		}
-		boolean estudianteEncontrado = false;
-		Estudiante estudiante = new Estudiante();
-		for (Estudiante estudiante1 : estudiantes) {
-			if (estudiante1.getRut().equalsIgnoreCase(rutEstudiante)) {
-				estudianteEncontrado = true;
-				estudiante = estudiante1;
+
+		Estudiante estudiante = null;
+		for (Estudiante est : estudiantes) {
+			if (est.getRut().equalsIgnoreCase(rutEstudiante)) {
+				estudiante = est;
+				break;
 			}
 		}
-		if (!estudianteEncontrado) {
-			System.out.println("Estudiantes no encontrado. Debe registrarse.");
+
+		if (estudiante == null) {
+			System.out.println("Estudiante no encontrado. Debe registrarse.");
 			return;
 		}
 
-		if (estudiante == null || cursoIngresado == null
-				|| cursoIngresado.isEmpty()) {
-			System.out.println(
-					"Estudiante o curso no válidos. Intente nuevamente.");
+		if (cursoIngresado == null || cursoIngresado.isEmpty()) {
+			System.out.println("Curso no válido. Intente nuevamente.");
 			return;
 		}
-		final String cursoFinal = cursoIngresado; // Lambda pedia una constante
+
 		if (estudiante.getCursos().stream()
-				.anyMatch(e -> e.getNombre().equals(cursoFinal))) {
-			System.out.println(
-					"Estudiante ya inscrito en el curso: " + cursoIngresado);
+				.anyMatch(c -> c.getNombre().equalsIgnoreCase(cursoIngresado))) {
+			System.out.println("Estudiante ya inscrito en el curso: " + cursoIngresado);
 			return;
-		} else {
-			boolean cursoEncontrado = false;
-			for (Curso curso : cursos) {
-				if (curso.getNombre().equals(cursoIngresado)) {
-					curso.inscribirEstudiante(estudiante);
-					estudiante.getCursos().add(curso);
-					Inscripcion nuevaInscripcion = new Inscripcion(estudiante,
-							curso, LocalDate.now().toString());
-					inscripciones.add(nuevaInscripcion);
-					cursoEncontrado = true;
-					System.out.println("Inscripción exitosa en el curso: "
-							+ cursoIngresado);
-					return;
-				}
+		}
+
+		for (Curso curso : cursos) {
+			if (curso.getNombre().equalsIgnoreCase(cursoIngresado)) {
+				curso.inscribirEstudiante(estudiante);
+				estudiante.getCursos().add(curso);
+
+				Inscripcion nuevaInscripcion = new Inscripcion(estudiante, curso, LocalDate.now().toString());
+				inscripciones.add(nuevaInscripcion);
+				estudiante.agregarInscripcion(nuevaInscripcion); // si lo tienes
+
+				System.out.println("Inscripción exitosa en el curso: " + curso.getNombre());
+				return;
 			}
 		}
 
+		System.out.println("Curso no encontrado.");
 	}
+
 	
 	/**
 	 * Muestra las calificaciones de un estudiante en todas las evaluaciones,
