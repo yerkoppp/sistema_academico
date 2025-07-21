@@ -1,3 +1,11 @@
+/**
+ * 
+ * @author Yerko Osorio
+ * @author Luis Guevara
+ * @author Jhoseph Quiroga
+ * @author Norma Armijo
+ * @version 1.0
+ */
 package sistema;
 
 import java.time.LocalDate;
@@ -8,19 +16,55 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-// Clase SistemaAcademico (Clase principal para la gestión)
+/**
+ * lase principal del sistema académico.
+ * Se encarga de gestionar el flujo principal del programa:
+ * menú, registros, inscripciones, evaluaciones, reportes, etc.
+ * 
+ * Contiene listas estáticas de estudiantes, docentes, cursos,
+ * inscripciones y evaluaciones.
+ * */
+
 public class SistemaAcademico {
 
+	/**
+	 * Scanner global para la entrada por consola.
+	 */
 	static Scanner sc = new Scanner(System.in);
+	/**
+	 * Lista de todos los estudiantes registrados en el sistema.
+	 */
 	static ArrayList<Estudiante> estudiantes = new ArrayList<>();
+	/**
+	 * Lista de todos los docentes registrados en el sistema.
+	 */
 	static ArrayList<Docente> docentes = new ArrayList<>();
+	/**
+	 * Lista de todos los cursos registrados en el sistema.
+	 */
 	static ArrayList<Curso> cursos = new ArrayList<>();
+	/**
+	 * Lista de todas las inscripciones registradas.
+	 */
 	static ArrayList<Inscripcion> inscripciones = new ArrayList<>();
+	/**
+	 * Lista de todas las evaluaciones realizadas.
+	 */
 	static ArrayList<Evaluacion> evaluaciones = new ArrayList<>();
 
+	/**
+	 * Menú principal del sistema académico.
+	 */
 	static Menu menu = new Menu();
+	/**
+	 * Bandera que controla la ejecución del bucle principal.
+	 */
 	static boolean continuarMain = true;
 
+	/**
+	 * Punto de entrada del programa.
+	 * Muestra la bienvenida y ejecuta el menú principal.
+	 */
 	public static void main(String[] args) {
 		mostrarBienvenida();
 
@@ -33,6 +77,10 @@ public class SistemaAcademico {
 		sc.close();
 	}
 
+	/**
+	 * Muestra un mensaje de bienvenida estilizado por consola
+	 * al iniciar el sistema académico.
+	 */
 	public static void mostrarBienvenida() {
 		System.out.println("=".repeat(50));
 		System.out.println("-".repeat(6) + " BIENVENIDO AL SISTEMA ACADÉMICO "
@@ -40,6 +88,11 @@ public class SistemaAcademico {
 		System.out.println("=".repeat(50));
 	}
 
+	/**
+	 * Ejecuta la opción seleccionada del menú principal.
+	 * 
+	 * @param opcion Número entero correspondiente a la opción del menú.
+	 */
 	public static void ejecutarOpcion(int opcion) {
 		switch (opcion) {
 		case 0: // CARGAR DATOS DE PRUEBA
@@ -141,121 +194,12 @@ public class SistemaAcademico {
 			break;
 		}
 	}
-
-	public static void listarCalificacionesAlumno() {
-		System.out.println("Ingrese el RUT del estudiante:");
-		String rut = sc.nextLine();
-		Estudiante estudiante = buscarEstudiantePorRut(rut);
-
-		if (estudiante == null) {
-			System.out.println("Estudiante no encontrado.");
-			return;
-		}
-
-		boolean tieneCalificaciones = false;
-		boolean mostrarTitulo = true;
-		for (Evaluacion evaluacion : evaluaciones) {
-			HashMap<Estudiante, Double> notas = evaluacion.getCalificaciones();
-
-			if (notas.containsKey(estudiante)) {
-				double nota = notas.get(estudiante);
-				if (mostrarTitulo) {
-					System.out.println("Las notas del estudiantes "
-							+ estudiante.getNombre() + " son:");
-					mostrarTitulo = false;
-				}
-				System.out.println("Tipo: " + evaluacion.getTipo() + ", Fecha: "
-						+ evaluacion.getFecha() + ", Puntaje máximo: "
-						+ evaluacion.getPuntajeMaximo() + ", Nota obtenida: "
-						+ nota);
-				tieneCalificaciones = true;
-			}
-		}
-
-		if (!tieneCalificaciones) {
-			System.out.println(
-					"El estudiante no tiene calificaciones registradas.");
-		}
-	}
-
-	public static void listarCursos() {
-		if (cursos.isEmpty()) {
-			System.out.println("No existen cursos");
-		} else {
-			System.out.println("Listado de cursos disponibles:");
-			for (Curso curso : cursos) {		
-				System.out.println("- " + curso.getNombre());
-			}
-		}
-	}
-
-	public static void listarEstudiantesCurso() {
-		String cursoIngresado = seleccionarCurso();
-		boolean encontrado = false;
-
-		for (Curso curso : cursos) {
-			if (curso.getNombre().equalsIgnoreCase(cursoIngresado)) {
-				encontrado = true;
-				System.out.println(
-						"Estudiantes del curso " + curso.getNombre() + ":\n");
-				for (Estudiante estudiante : curso.getEstudiantes()) {
-					System.out.println(estudiante.toString());
-				}
-			}
-		}
-
-		if (!encontrado) {
-			System.out.println("No se encontró el curso ingresado.");
-		}
-	}
-
-	// Métodos auxiliares para buscar objetos por ID
-	public static Estudiante buscarEstudiantePorRut(String rut) {
-		boolean encontrado = false;
-		for (Estudiante estudiante : estudiantes) {
-			if (estudiante.getRut().equals(rut)) {
-				encontrado = true;
-				return estudiante;
-			}
-		}
-		if (!encontrado) {
-			System.out
-					.println("No se encontró un estudiante con el RUT: " + rut);
-		}
-		return null;
-	}
-
-	public static Docente buscarDocentePorRut(String rut) {
-		int contador = 0;
-		for (Docente docente : docentes) {
-			if (docente.getRut().equals(rut)) {
-				return docente;
-			}
-			contador++;
-		}
-
-		if (contador == docentes.size()) {
-			System.out.println("No se encontró un docente con el RUT: " + rut);
-		}
-
-		return null;
-	}
-
-	public static Curso buscarCursoPorCodigo(String codigo) {
-		int contador = 0;
-		for (Curso curso : cursos) {
-			if (curso.getCodigo().equals(codigo)) {
-				return curso;
-			}
-			contador++;
-		}
-		if (contador == cursos.size()) {
-			System.out.println(
-					"No se encontró un curso con el código: " + codigo);
-		}
-		return null;
-	}
-
+	
+	/**
+	 * Registra un nuevo docente solicitando sus datos por consola.
+	 * 
+	 * @return El objeto Docente creado, o null si el RUT no es válido.
+	 */
 	public static Estudiante registrarEstudiante() {
 		try {
 			System.out.println("Ingrese el RUT del estudiante (11222333-4): ");
@@ -282,7 +226,12 @@ public class SistemaAcademico {
 			return null;
 		}
 	}
-
+	
+	/**
+	 * Registra un nuevo docente solicitando sus datos por consola.
+	 * 
+	 * @return El objeto Docente creado, o null si el RUT no es válido.
+	 */
 	public static Docente registrarDocente() {
 		System.out.println("Ingrese el nombre del docente: ");
 		String nombre = sc.nextLine();
@@ -300,6 +249,12 @@ public class SistemaAcademico {
 		return docente;
 	}
 
+	/**
+	 * Crea un nuevo curso solicitando los datos por consola.
+	 * Verifica que el docente exista o permite registrarlo en el momento.
+	 * 
+	 * @return El objeto Curso creado, o null si hubo error de entrada.
+	 */
 	public static Curso crearCurso() {
 		try {
 			Curso nuevoCurso = null;
@@ -348,42 +303,11 @@ public class SistemaAcademico {
 			return null;
 		}
 	}
-
-	public static String seleccionarCurso() {
-		String cursoIngresado;
-		boolean continuar = true;
-		int intentos = 0;
-		do {
-			System.out.println(
-					"Ingrese un curso (Ingrese 0 si desea ver la lista de "
-							+ "cursos): ");
-			cursoIngresado = sc.nextLine();
-			if (cursoIngresado.equals("0")) {
-				listarCursos();
-				System.out.println("Ingrese un curso");
-				cursoIngresado = sc.nextLine();
-			}
-			// Busca el curso en la lista de cursos.
-
-			for (Curso curso : cursos) {
-				if (curso.getNombre().equalsIgnoreCase(cursoIngresado)) {
-					continuar = false;
-					return cursoIngresado;
-				}
-			}
-			if (continuar) {
-				System.out.println("Curso no encontrado.");
-				intentos++;
-			}
-			if (intentos == 3) {
-				System.out.println("Alcanzó el máximo número de intentos.");
-				continuar = false;
-			}
-
-		} while (continuar);
-		return null;
-	}
-
+	
+	/**
+	 * Inscribe un estudiante en un curso, validando RUT y disponibilidad.
+	 * Crea una instancia de inscripción y la agrega a las listas correspondientes.
+	 */
 	public static void inscribirEstudianteEnCurso() {
 
 		System.out.printf("Ingresar inscripción.\n");
@@ -437,7 +361,221 @@ public class SistemaAcademico {
 		}
 
 	}
+	
+	/**
+	 * Muestra las calificaciones de un estudiante en todas las evaluaciones,
+	 * buscándolo por RUT.
+	 */
+	public static void listarCalificacionesAlumno() {
+		System.out.println("Ingrese el RUT del estudiante:");
+		String rut = sc.nextLine();
+		Estudiante estudiante = buscarEstudiantePorRut(rut);
 
+		if (estudiante == null) {
+			System.out.println("Estudiante no encontrado.");
+			return;
+		}
+
+		boolean tieneCalificaciones = false;
+		boolean mostrarTitulo = true;
+		for (Evaluacion evaluacion : evaluaciones) {
+			HashMap<Estudiante, Double> notas = evaluacion.getCalificaciones();
+
+			if (notas.containsKey(estudiante)) {
+				double nota = notas.get(estudiante);
+				if (mostrarTitulo) {
+					System.out.println("Las notas del estudiantes "
+							+ estudiante.getNombre() + " son:");
+					mostrarTitulo = false;
+				}
+				System.out.println("Tipo: " + evaluacion.getTipo() + ", Fecha: "
+						+ evaluacion.getFecha() + ", Puntaje máximo: "
+						+ evaluacion.getPuntajeMaximo() + ", Nota obtenida: "
+						+ nota);
+				tieneCalificaciones = true;
+			}
+		}
+
+		if (!tieneCalificaciones) {
+			System.out.println(
+					"El estudiante no tiene calificaciones registradas.");
+		}
+	}
+
+	/**
+	 * Ordena y muestra los cursos según su promedio general,
+	 * desde el más alto al más bajo.
+	 */
+	public static void reportarCursosPromediosMasAltos() {
+		if(cursos.isEmpty()) {
+			System.out.println("No hay cursos creados.");
+			return;
+		}
+		cursos.sort((c2,c1)-> Double.compare(c2.getPromedioGeneralDelCurso(),
+				c1.getPromedioGeneralDelCurso()));
+		System.out.println("Listado de cursos con mayor promedio general:");
+		System.out.printf("%-40s\t%s\n", "Nombre", "Promedio");
+		for (Curso curso : cursos) {
+			System.out.printf("%-40s\t%.1f\n", curso.getNombre(),
+					curso.getPromedioGeneralDelCurso());
+		}
+		
+	}
+	
+	/**
+	 * Muestra por consola la lista de todos los cursos disponibles registrados en el sistema.
+	 * Si no hay cursos, lo informa al usuario.
+	 */
+	public static void listarCursos() {
+		if (cursos.isEmpty()) {
+			System.out.println("No existen cursos");
+		} else {
+			System.out.println("Listado de cursos disponibles:");
+			for (Curso curso : cursos) {		
+				System.out.println("- " + curso.getNombre());
+			}
+		}
+	}
+
+	/**
+	 * Solicita al usuario un curso y muestra todos los estudiantes inscritos en él.
+	 * Si el curso no existe, muestra un mensaje de error.
+	 */
+	public static void listarEstudiantesCurso() {
+		String cursoIngresado = seleccionarCurso();
+		boolean encontrado = false;
+		boolean imprimirTitulo = true;
+		for (Curso curso : cursos) {
+			if (curso.getNombre().equalsIgnoreCase(cursoIngresado)) {
+				encontrado = true;
+				if(curso.getEstudiantes().isEmpty()) {
+					System.out.println("No hay estudiantes inscritos en el curso.");
+				}
+				for (Estudiante estudiante : curso.getEstudiantes()) {
+					if(imprimirTitulo) {
+						System.out.println(
+								"Estudiantes del curso " + curso.getNombre() + ":\n");
+						imprimirTitulo = false;
+					}
+					System.out.println(estudiante.toString());
+				}
+			}
+		}
+
+		if (!encontrado) {
+			System.out.println("No se encontró el curso ingresado.");
+		}
+	}
+
+	/**
+	 * Busca un estudiante por su RUT en la lista de estudiantes registrados.
+	 *
+	 * @param rut RUT del estudiante.
+	 * @return Estudiante si lo encuentra, null si no.
+	 */
+	public static Estudiante buscarEstudiantePorRut(String rut) {
+		boolean encontrado = false;
+		for (Estudiante estudiante : estudiantes) {
+			if (estudiante.getRut().equals(rut)) {
+				encontrado = true;
+				return estudiante;
+			}
+		}
+		if (!encontrado) {
+			System.out
+					.println("No se encontró un estudiante con el RUT: " + rut);
+		}
+		return null;
+	}
+
+	/**
+	 * Busca un docente por su RUT en la lista de docentes registrados.
+	 * 
+	 * @param rut RUT del docente
+	 * @return Docente si lo encuentra, null si no.
+	 */
+	public static Docente buscarDocentePorRut(String rut) {
+		int contador = 0;
+		for (Docente docente : docentes) {
+			if (docente.getRut().equals(rut)) {
+				return docente;
+			}
+			contador++;
+		}
+
+		if (contador == docentes.size()) {
+			System.out.println("No se encontró un docente con el RUT: " + rut);
+		}
+
+		return null;
+	}
+	
+	/**
+	 * Busca un curso por su código en la lista de cursos registrados.
+	 *
+	 * @param codigo Código del curso a buscar.
+	 * @return Curso si lo encuentra, null si no.
+	 */
+	public static Curso buscarCursoPorCodigo(String codigo) {
+		int contador = 0;
+		for (Curso curso : cursos) {
+			if (curso.getCodigo().equals(codigo)) {
+				return curso;
+			}
+			contador++;
+		}
+		if (contador == cursos.size()) {
+			System.out.println(
+					"No se encontró un curso con el código: " + codigo);
+		}
+		return null;
+	}
+
+	/**
+	 * Permite al usuario seleccionar un curso desde consola, con opción
+	 * de mostrar la lista si no lo recuerda.
+	 *
+	 * @return El nombre del curso seleccionado, o null si falla.
+	 */
+	public static String seleccionarCurso() {
+		String cursoIngresado;
+		boolean continuar = true;
+		int intentos = 0;
+		do {
+			System.out.println(
+					"Ingrese un curso (Ingrese 0 si desea ver la lista de "
+							+ "cursos): ");
+			cursoIngresado = sc.nextLine();
+			if (cursoIngresado.equals("0")) {
+				listarCursos();
+				System.out.println("Ingrese un curso");
+				cursoIngresado = sc.nextLine();
+			}
+			// Busca el curso en la lista de cursos.
+
+			for (Curso curso : cursos) {
+				if (curso.getNombre().equalsIgnoreCase(cursoIngresado)) {
+					continuar = false;
+					return cursoIngresado;
+				}
+			}
+			if (continuar) {
+				System.out.println("Curso no encontrado.");
+				intentos++;
+			}
+			if (intentos == 3) {
+				System.out.println("Alcanzó el máximo número de intentos.");
+				continuar = false;
+			}
+
+		} while (continuar);
+		return null;
+	}
+
+	/**
+	 * Registra una evaluación asociada a un curso, solicitando datos como
+	 * tipo, puntaje máximo y notas para estudiantes desde consola.
+	 */
 	private static void registrarEvaluacion() {
 		try {
 			Curso curso = new Curso();
@@ -487,6 +625,15 @@ public class SistemaAcademico {
 		}
 	}
 
+	/**
+	 * Asocia una nota a un estudiante dentro de una evaluación en un curso determinado.
+	 *
+	 * @param rutEstudiante RUT del estudiante.
+	 * @param curso Curso al que pertenece la evaluación.
+	 * @param tipoEvaluacion Tipo de evaluación (Ej: Examen, Control).
+	 * @param puntajeMaximo Puntaje máximo de la evaluación.
+	 * @param nota Nota obtenida por el estudiante.
+	 */
 //	public static Inscripcion inscribirEstudianteEnCurso(Estudiante estudiante,
 //			String cursoIngresado) {
 //
@@ -526,8 +673,9 @@ public class SistemaAcademico {
 
 	}
 
-	// Funciona
-
+	/**
+	 * Muestra la lista de todos los estudiantes registrados en el sistema.
+	 */
 	public static void mostrarTodosEstudiantes() {
 		if (estudiantes.isEmpty()) {
 			System.out.println("No hay estudiantes registrados.");
@@ -539,7 +687,9 @@ public class SistemaAcademico {
 		}
 	}
 
-	// Funciona
+	/**
+	 * Muestra la lista de todos los docentes registrados en el sistema.
+	 */
 	public static void mostrarTodosDocentes() {
 		if (docentes.isEmpty()) {
 			System.out.println("No hay docentes registrados.");
@@ -551,7 +701,11 @@ public class SistemaAcademico {
 		}
 	}
 
-
+	/**
+	 * Muestra la información del estudiante con el RUT dado.
+	 *
+	 * @param rutEstudiante RUT del estudiante.
+	 */
 	public static void mostrarCalificacionesDeEstudianteEnTodosSusCursos(
 			String rutEstudiante) {
 
@@ -563,22 +717,10 @@ public class SistemaAcademico {
 		}
 	}
 
-	public static void reportarCursosPromediosMasAltos() {
-		if(cursos.isEmpty()) {
-			System.out.println("No hay cursos creados.");
-			return;
-		}
-		cursos.sort((c2,c1)-> Double.compare(c2.getPromedioGeneralDelCurso(),
-				c1.getPromedioGeneralDelCurso()));
-		System.out.println("Listado de cursos con mayor promedio general:");
-		System.out.printf("%-40s\t%s\n", "Nombre", "Promedio");
-		for (Curso curso : cursos) {
-			System.out.printf("%-40s\t%.1f\n", curso.getNombre(),
-					curso.getPromedioGeneralDelCurso());
-		}
-		
-	}
-
+	/**
+	 * Ordena y muestra los docentes según la cantidad de cursos que dictan,
+	 * del que más cursos tiene al que menos.
+	 */
 	public static void listarDocentesMayorCarga() {
 		if(docentes.isEmpty()) {
 			System.out.println("No hay docentes creados.");
@@ -595,6 +737,12 @@ public class SistemaAcademico {
 		}
 	}
 
+	/**
+	 * Valida un RUT chileno utilizando el algoritmo del Módulo 11.
+	 * 
+	 * @param rut RUT en formato 11222333-K
+	 * @return true si es válido, false si no.
+	 */
 	public static boolean validarRut(String rut) {
 
 		if (rut == null || !rut.matches("\\d{7,8}-[0-9Kk]")) {
