@@ -14,7 +14,6 @@ public class Inscripcion {
 		this.estudiante = estudiante;
 		this.curso = curso;
 		this.fechaInscripcion = fechaInscripcion;
-		System.out.println("Inscripción creada: " + this.toString());
 	}
 
 	// Getters y Setters para todos los atributos

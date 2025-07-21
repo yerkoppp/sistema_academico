@@ -8,8 +8,8 @@ public class Curso {
 	private String nombre;
 	private int numCreditos;
 	private Docente docenteAsignado; // Relación de asociación
-	private ArrayList<Evaluacion> evaluaciones; // Relación de composición
-	private ArrayList<Estudiante> estudiantesInscritos; // Para gestionar inscripciones de estudiantes
+	private ArrayList<Evaluacion> evaluaciones = new ArrayList<>(); // Relación de composición
+	private ArrayList<Estudiante> estudiantesInscritos = new ArrayList<>(); // Para gestionar inscripciones de estudiantes
 
 	public Curso() {
 		// Constructor sin parámetros
@@ -20,7 +20,6 @@ public class Curso {
 		this.nombre = nombre;
 		this.numCreditos = numCreditos;
 		this.docenteAsignado = docenteAsignado;
-		this.evaluaciones = new ArrayList<>();
 	}
 
 	// Getters y Setters para todos los atributos
@@ -57,6 +56,8 @@ public class Curso {
 		try {
 			if (!estudiantesInscritos.contains(estudiante)) {
 				estudiantesInscritos.add(estudiante);
+			} else {
+				System.out.println("El estudiante ya esta inscrito en el curso.");
 			}
 			return true;
 		} catch (Exception e) {
@@ -67,7 +68,6 @@ public class Curso {
 
 	public void agregarEvaluacion(Evaluacion evaluacion) {
 		evaluaciones.add(evaluacion);
-		System.out.println("Se agrego la evaluacion con exito.");
 	}
 
 	/**
@@ -76,7 +76,6 @@ public class Curso {
 	 */
 	public double getPromedioGeneralDelCurso() {
 		if (estudiantesInscritos.isEmpty()) {
-			System.out.println("No hay estudiantes en el curso.");
 			return 0.0;
 		}
 

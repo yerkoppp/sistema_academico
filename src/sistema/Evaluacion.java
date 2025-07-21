@@ -41,11 +41,13 @@ public class Evaluacion {
 	/**
 	 * Asigna una calificación a un estudiante
 	 */
-	public void asignarCalificacion(Estudiante estudiante, double nota) {
+	public boolean asignarCalificacion(Estudiante estudiante, double nota) {
 		if (nota >= 0 && nota <= this.puntajeMaximo) {
 			calificaciones.put(estudiante, nota);
+			return true;
 		} else {
 			System.out.println("Nota inválida para " + estudiante.getNombre());
+			return false;
 		}
 	}
 

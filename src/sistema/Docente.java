@@ -7,7 +7,7 @@ public class Docente {
 	private String rut;
 	private String nombre;
 	private String areaEspecializacion;
-	private ArrayList<Curso> cursosDictados; // Relación de asociación
+	private ArrayList<Curso> cursosDictados = new ArrayList<>(); // Relación de asociación
 
 	public Docente() {
 		// Constructor sin parámetros
@@ -38,7 +38,8 @@ public class Docente {
 
 	// Métodos específicos
 	public void agregarCurso(Curso curso) {
-		/* ... */ } // Para asociar cursos que dicta
+		cursosDictados.add(curso);
+	}
 
 	@Override
 	public String toString() {

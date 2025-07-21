@@ -8,9 +8,10 @@ public class Estudiante {
 	private String nombre;
 	private String carrera;
 	private int anioIngreso;
-	private ArrayList<Inscripcion> inscripciones; // Relación de composición
-	private ArrayList<Curso> cursos; // Relación de composición
-
+	private ArrayList<Inscripcion> inscripciones = new ArrayList<>(); // Relación de composición
+	private ArrayList<Curso> cursos = new ArrayList<>(); // Relación de composición
+	
+	
 	public Estudiante() {
 		// Constructor sin parámetros
 	}
@@ -65,7 +66,7 @@ public class Estudiante {
 	public void agregarInscripcion(Inscripcion inscripcion) {
 		if (!inscripciones.contains(inscripcion)) {
 			inscripciones.add(inscripcion);
-			System.out.println("Curso inscrito exitosamente");
+			System.out.println("Curso inscrito exitosamente.");
 		} else {
 			System.out.println("Ya se encuentra inscrito en el curso");
 		}

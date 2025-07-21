@@ -7,7 +7,7 @@ public class DatosPrueba {
 	public DatosPrueba(ArrayList<Curso> cursos, ArrayList<Docente> docentes, ArrayList<Estudiante> estudiantes,
 			ArrayList<Inscripcion> inscripciones) {
 		// 1. Crear instancia del SistemaAcademico
-
+		SistemaAcademico sistemaAcademico = new SistemaAcademico();
 		// 2. Crear y registrar Docentes
 		Docente docente1 = new Docente("11111111-1", "Ana Garcia", "Programación");
 		Docente docente2 = new Docente("22222222-2", "Juan Perez", "Bases de Datos");
@@ -18,8 +18,8 @@ public class DatosPrueba {
 		docentes.add(docente3);
 
 		// 3. Crear y registrar Estudiantes
-		Estudiante estudiante1 = new Estudiante("12345678-9", "Carlos Rojas", "Ingeniería Informática", 2023);
-		Estudiante estudiante2 = new Estudiante("98765432-1", "Laura Soto", "Diseño Gráfico", 2024);
+		Estudiante estudiante1 = new Estudiante("111", "Carlos Rojas", "Ingeniería Informática", 2023);
+		Estudiante estudiante2 = new Estudiante("1111111-4", "Laura Soto", "Diseño Gráfico", 2024);
 		Estudiante estudiante3 = new Estudiante("45678912-3", "Pedro Gómez", "Ingeniería Informática", 2023);
 		Estudiante estudiante4 = new Estudiante("78912345-6", "Sofía Diaz", "Contabilidad", 2024);
 
@@ -33,11 +33,13 @@ public class DatosPrueba {
 		Curso curso2 = new Curso("BD201", "Modelado de Bases de Datos", 4, docente2);
 		Curso curso3 = new Curso("RED301", "Redes de Computadoras I", 6, docente3);
 		Curso curso4 = new Curso("CONT101", "Contabilidad Básica", 3, docente3); // Docente 3 también dicta este curso
-
+		Curso curso5 = new Curso("MATT101", "mat", 3, docente2);
+		
 		cursos.add(curso1);
 		cursos.add(curso2);
 		cursos.add(curso3);
 		cursos.add(curso4);
+		cursos.add(curso5);
 
 		// 6. Crear Evaluaciones y asignar calificaciones
 		System.out.println("--- Asignación de Calificaciones ---");
@@ -50,6 +52,13 @@ public class DatosPrueba {
 		curso2.agregarEvaluacion(evalBD_ExamenFinal);
 		curso3.agregarEvaluacion(evalRedes_Tarea1);
 		curso4.agregarEvaluacion(evalContabilidad_Parcial);
+		
+		sistemaAcademico.asignarCalificacionEvaluacion(estudiante1.getRut(), 
+				curso1, "PEP1", 7, 6);
+		sistemaAcademico.asignarCalificacionEvaluacion(estudiante1.getRut(), 
+				curso1, "PEP2", 7, 3);
+		
+		
 
 		// Asignar calificaciones a Carlos en POO
 		evalPOO_Parcial1.asignarCalificacion(estudiante1, 6.5);
