@@ -17,13 +17,13 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
- * lase principal del sistema académico.
- * Se encarga de gestionar el flujo principal del programa:
- * menú, registros, inscripciones, evaluaciones, reportes, etc.
+ * lase principal del sistema académico. Se encarga de gestionar el flujo
+ * principal del programa: menú, registros, inscripciones, evaluaciones,
+ * reportes, etc.
  * 
- * Contiene listas estáticas de estudiantes, docentes, cursos,
- * inscripciones y evaluaciones.
- * */
+ * Contiene listas estáticas de estudiantes, docentes, cursos, inscripciones y
+ * evaluaciones.
+ */
 
 public class SistemaAcademico {
 
@@ -62,8 +62,8 @@ public class SistemaAcademico {
 	static boolean continuarMain = true;
 
 	/**
-	 * Punto de entrada del programa.
-	 * Muestra la bienvenida y ejecuta el menú principal.
+	 * Punto de entrada del programa. Muestra la bienvenida y ejecuta el menú
+	 * principal.
 	 */
 	public static void main(String[] args) {
 		mostrarBienvenida();
@@ -78,8 +78,8 @@ public class SistemaAcademico {
 	}
 
 	/**
-	 * Muestra un mensaje de bienvenida estilizado por consola
-	 * al iniciar el sistema académico.
+	 * Muestra un mensaje de bienvenida estilizado por consola al iniciar el
+	 * sistema académico.
 	 */
 	public static void mostrarBienvenida() {
 		System.out.println("=".repeat(50));
@@ -194,7 +194,7 @@ public class SistemaAcademico {
 			break;
 		}
 	}
-	
+
 	/**
 	 * Registra un nuevo docente solicitando sus datos por consola.
 	 * 
@@ -226,7 +226,7 @@ public class SistemaAcademico {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * Registra un nuevo docente solicitando sus datos por consola.
 	 * 
@@ -250,8 +250,8 @@ public class SistemaAcademico {
 	}
 
 	/**
-	 * Crea un nuevo curso solicitando los datos por consola.
-	 * Verifica que el docente exista o permite registrarlo en el momento.
+	 * Crea un nuevo curso solicitando los datos por consola. Verifica que el
+	 * docente exista o permite registrarlo en el momento.
 	 * 
 	 * @return El objeto Curso creado, o null si hubo error de entrada.
 	 */
@@ -276,8 +276,7 @@ public class SistemaAcademico {
 					nuevoCurso = new Curso(codigo, nombre, numCreditos,
 							docente);
 					docente.agregarCurso(nuevoCurso);
-					System.out.println(
-							"Curso creado exitosamente: " + nombre);
+					System.out.println("Curso creado exitosamente: " + nombre);
 					docenteEncontrado = true;
 					break;
 				}
@@ -305,10 +304,10 @@ public class SistemaAcademico {
 			return null;
 		}
 	}
-	
+
 	/**
-	 * Inscribe un estudiante en un curso, validando RUT y disponibilidad.
-	 * Crea una instancia de inscripción y la agrega a las listas correspondientes.
+	 * Inscribe un estudiante en un curso, validando RUT y disponibilidad. Crea
+	 * una instancia de inscripción y la agrega a las listas correspondientes.
 	 */
 //	public static void inscribirEstudianteEnCurso() {
 //
@@ -396,9 +395,10 @@ public class SistemaAcademico {
 			return;
 		}
 
-		if (estudiante.getCursos().stream()
-				.anyMatch(c -> c.getNombre().equalsIgnoreCase(cursoIngresado))) {
-			System.out.println("Estudiante ya inscrito en el curso: " + cursoIngresado);
+		if (estudiante.getCursos().stream().anyMatch(
+				c -> c.getNombre().equalsIgnoreCase(cursoIngresado))) {
+			System.out.println(
+					"Estudiante ya inscrito en el curso: " + cursoIngresado);
 			return;
 		}
 
@@ -407,11 +407,13 @@ public class SistemaAcademico {
 				curso.inscribirEstudiante(estudiante);
 				estudiante.getCursos().add(curso);
 
-				Inscripcion nuevaInscripcion = new Inscripcion(estudiante, curso, LocalDate.now().toString());
+				Inscripcion nuevaInscripcion = new Inscripcion(estudiante,
+						curso, LocalDate.now().toString());
 				inscripciones.add(nuevaInscripcion);
 				estudiante.agregarInscripcion(nuevaInscripcion); // si lo tienes
 
-				System.out.println("Inscripción exitosa en el curso: " + curso.getNombre());
+				System.out.println("Inscripción exitosa en el curso: "
+						+ curso.getNombre());
 				return;
 			}
 		}
@@ -419,7 +421,6 @@ public class SistemaAcademico {
 		System.out.println("Curso no encontrado.");
 	}
 
-	
 	/**
 	 * Muestra las calificaciones de un estudiante en todas las evaluaciones,
 	 * buscándolo por RUT.
@@ -461,15 +462,15 @@ public class SistemaAcademico {
 	}
 
 	/**
-	 * Ordena y muestra los cursos según su promedio general,
-	 * desde el más alto al más bajo.
+	 * Ordena y muestra los cursos según su promedio general, desde el más alto
+	 * al más bajo.
 	 */
 	public static void reportarCursosPromediosMasAltos() {
-		if(cursos.isEmpty()) {
+		if (cursos.isEmpty()) {
 			System.out.println("No hay cursos creados.");
 			return;
 		}
-		cursos.sort((c1,c2)-> Double.compare(c2.getPromedioGeneralDelCurso(),
+		cursos.sort((c1, c2) -> Double.compare(c2.getPromedioGeneralDelCurso(),
 				c1.getPromedioGeneralDelCurso()));
 		System.out.println("Listado de cursos con mayor promedio general:");
 		System.out.printf("%-40s\t%s\n", "Nombre", "Promedio");
@@ -477,27 +478,30 @@ public class SistemaAcademico {
 			System.out.printf("%-40s\t%.1f\n", curso.getNombre(),
 					curso.getPromedioGeneralDelCurso());
 		}
-		
+
 	}
-	
+
 	/**
-	 * Muestra por consola la lista de todos los cursos disponibles registrados en el sistema.
-	 * Si no hay cursos, lo informa al usuario.
+	 * Muestra por consola la lista de todos los cursos disponibles registrados
+	 * en el sistema. Si no hay cursos, lo informa al usuario.
 	 */
 	public static void listarCursos() {
 		if (cursos.isEmpty()) {
 			System.out.println("No existen cursos");
 		} else {
 			System.out.println("Listado de cursos disponibles:");
-			for (Curso curso : cursos) {		
-				System.out.println("- " + curso.getNombre());
+			for (Curso curso : cursos) {
+				if (curso != null) {
+					System.out.println("- " + curso.getNombre());
+				}
+
 			}
 		}
 	}
 
 	/**
-	 * Solicita al usuario un curso y muestra todos los estudiantes inscritos en él.
-	 * Si el curso no existe, muestra un mensaje de error.
+	 * Solicita al usuario un curso y muestra todos los estudiantes inscritos en
+	 * él. Si el curso no existe, muestra un mensaje de error.
 	 */
 	public static void listarEstudiantesCurso() {
 		String cursoIngresado = seleccionarCurso();
@@ -506,13 +510,14 @@ public class SistemaAcademico {
 		for (Curso curso : cursos) {
 			if (curso.getNombre().equalsIgnoreCase(cursoIngresado)) {
 				encontrado = true;
-				if(curso.getEstudiantes().isEmpty()) {
-					System.out.println("No hay estudiantes inscritos en el curso.");
+				if (curso.getEstudiantes().isEmpty()) {
+					System.out.println(
+							"No hay estudiantes inscritos en el curso.");
 				}
 				for (Estudiante estudiante : curso.getEstudiantes()) {
-					if(imprimirTitulo) {
-						System.out.println(
-								"Estudiantes del curso " + curso.getNombre() + ":\n");
+					if (imprimirTitulo) {
+						System.out.println("Estudiantes del curso "
+								+ curso.getNombre() + ":\n");
 						imprimirTitulo = false;
 					}
 					System.out.println(estudiante.toString());
@@ -567,7 +572,7 @@ public class SistemaAcademico {
 
 		return null;
 	}
-	
+
 	/**
 	 * Busca un curso por su código en la lista de cursos registrados.
 	 *
@@ -590,8 +595,8 @@ public class SistemaAcademico {
 	}
 
 	/**
-	 * Permite al usuario seleccionar un curso desde consola, con opción
-	 * de mostrar la lista si no lo recuerda.
+	 * Permite al usuario seleccionar un curso desde consola, con opción de
+	 * mostrar la lista si no lo recuerda.
 	 *
 	 * @return El nombre del curso seleccionado, o null si falla.
 	 */
@@ -631,8 +636,8 @@ public class SistemaAcademico {
 	}
 
 	/**
-	 * Registra una evaluación asociada a un curso, solicitando datos como
-	 * tipo, puntaje máximo y notas para estudiantes desde consola.
+	 * Registra una evaluación asociada a un curso, solicitando datos como tipo,
+	 * puntaje máximo y notas para estudiantes desde consola.
 	 */
 	private static void registrarEvaluacion() {
 		try {
@@ -684,13 +689,14 @@ public class SistemaAcademico {
 	}
 
 	/**
-	 * Asocia una nota a un estudiante dentro de una evaluación en un curso determinado.
+	 * Asocia una nota a un estudiante dentro de una evaluación en un curso
+	 * determinado.
 	 *
-	 * @param rutEstudiante RUT del estudiante.
-	 * @param curso Curso al que pertenece la evaluación.
+	 * @param rutEstudiante  RUT del estudiante.
+	 * @param curso          Curso al que pertenece la evaluación.
 	 * @param tipoEvaluacion Tipo de evaluación (Ej: Examen, Control).
-	 * @param puntajeMaximo Puntaje máximo de la evaluación.
-	 * @param nota Nota obtenida por el estudiante.
+	 * @param puntajeMaximo  Puntaje máximo de la evaluación.
+	 * @param nota           Nota obtenida por el estudiante.
 	 */
 //	public static Inscripcion inscribirEstudianteEnCurso(Estudiante estudiante,
 //			String cursoIngresado) {
@@ -777,11 +783,11 @@ public class SistemaAcademico {
 	}
 
 	/**
-	 * Ordena y muestra los docentes según la cantidad de cursos que dictan,
-	 * del que más cursos tiene al que menos.
+	 * Ordena y muestra los docentes según la cantidad de cursos que dictan, del
+	 * que más cursos tiene al que menos.
 	 */
 	public static void listarDocentesMayorCarga() {
-		if(docentes.isEmpty()) {
+		if (docentes.isEmpty()) {
 			System.out.println("No hay docentes creados.");
 			return;
 		}
