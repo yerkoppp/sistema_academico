@@ -1,9 +1,34 @@
+/**
+ * 
+ * @author Yerko Osorio
+ * @author Luis Guevara
+ * @author Jhoseph Quiroga
+ * @author Norma Armijo
+ * @version 1.0
+ */
+
 package sistema;
 
 import java.util.ArrayList;
 
+/**
+ * Clase utilizada para cargar datos de prueba en el sistema académico.
+ * 
+ * Esta clase inicializa y agrega docentes, estudiantes, cursos,
+ * inscripciones y evaluaciones con calificaciones de ejemplo.
+ * 
+ * Se utiliza para poblar el sistema con información inicial útil para pruebas y demostraciones.
+ */
 public class DatosPrueba {
 
+	/**
+	 * Constructor que carga datos de prueba en las listas proporcionadas.
+	 *
+	 * @param cursos Lista de cursos del sistema.
+	 * @param docentes Lista de docentes del sistema.
+	 * @param estudiantes Lista de estudiantes del sistema.
+	 * @param inscripciones Lista de inscripciones del sistema.
+	 */
 	public DatosPrueba(ArrayList<Curso> cursos, ArrayList<Docente> docentes, ArrayList<Estudiante> estudiantes,
 			ArrayList<Inscripcion> inscripciones) {
 		// 1. Crear instancia del SistemaAcademico
