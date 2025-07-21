@@ -276,6 +276,8 @@ public class SistemaAcademico {
 					nuevoCurso = new Curso(codigo, nombre, numCreditos,
 							docente);
 					docente.agregarCurso(nuevoCurso);
+					System.out.println(
+							"Curso creado exitosamente: " + nombre);
 					docenteEncontrado = true;
 					break;
 				}
@@ -467,7 +469,7 @@ public class SistemaAcademico {
 			System.out.println("No hay cursos creados.");
 			return;
 		}
-		cursos.sort((c2,c1)-> Double.compare(c2.getPromedioGeneralDelCurso(),
+		cursos.sort((c1,c2)-> Double.compare(c2.getPromedioGeneralDelCurso(),
 				c1.getPromedioGeneralDelCurso()));
 		System.out.println("Listado de cursos con mayor promedio general:");
 		System.out.printf("%-40s\t%s\n", "Nombre", "Promedio");
