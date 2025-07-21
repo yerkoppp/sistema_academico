@@ -1,12 +1,33 @@
+/**
+ * 
+ * @author Yerko Osorio
+ * @author Luis Guevara
+ * @author Jhoseph Quiroga
+ * @author Norma Armijo
+ * @version 1.0
+ */
 package sistema;
 
 import java.util.HashMap;
 
 //Clase Evaluacion
 public class Evaluacion {
+	/**
+	 * Tipo de evaluación (por ejemplo, Examen, Trabajo, Control).
+	 */
 	private String tipo; // Examen, Trabajo, Control
+	/**
+	 * Fecha en que se realizó la evaluación (formato: DD/MM/AAAA).
+	 */
 	private String fecha; // DD/MM/AAAA
+	/**
+	 * Puntaje máximo que se puede obtener en la evaluación.
+	 */
 	private double puntajeMaximo;
+	/**
+	 * Mapa que almacena las calificaciones de los estudiantes.
+	 * La clave es un objeto {@link Estudiante} y el valor es la nota obtenida.
+	 */
 	private HashMap<Estudiante, Double> calificaciones;
 
 	public Evaluacion() {

@@ -665,6 +665,7 @@ public class SistemaAcademico {
 				nota);
 		if (notaValida) {
 			curso.agregarEvaluacion(evaluacion);
+			estudianteEvaluado.agregarEvaluacion(evaluacion);
 			evaluaciones.add(evaluacion);
 
 			System.out.println("Se ha registrado la evaluacion del estudiante "

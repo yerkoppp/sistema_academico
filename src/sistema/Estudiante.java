@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * los cursos.
  */
 public class Estudiante {
-	
+
 	/**
 	 * RUT único del estudiante, utilizado como identificador principal.
 	 */
@@ -40,12 +40,17 @@ public class Estudiante {
 	/**
 	 * Lista de inscripciones realizadas por el estudiante.
 	 */
-	private ArrayList<Inscripcion> inscripciones = new ArrayList<>(); 
+	private ArrayList<Inscripcion> inscripciones = new ArrayList<>();
 	/**
-	 * Lista de cursos en los que el estudiante está inscrito.
-	 * Esta relación también se considera de composición.
+	 * Lista de cursos en los que el estudiante está inscrito. Esta relación
+	 * también se considera de composición.
 	 */
-	private ArrayList<Curso> cursos = new ArrayList<>(); 
+	private ArrayList<Curso> cursos = new ArrayList<>();
+	/**
+	 * Lista de evaluaciones del estudiante.
+	 */
+	private ArrayList<Evaluacion> evaluaciones = new ArrayList<>();
+
 	/**
 	 * Constructor vacío de la clase Estudiante.
 	 */
@@ -125,6 +130,41 @@ public class Estudiante {
 	}
 
 	// Métodos específicos
+
+	/**
+	 * Calcula el promedio general del estudiante. Actualmente retorna 0.0 como
+	 * valor predeterminado.
+	 * 
+	 * @return Promedio general del estudiante.
+	 */
+	public double getPromedioGeneral() {
+		if (evaluaciones.isEmpty()) {
+			return 0.0;
+		}
+
+		double sumaNotas = 0.0;
+		int cantidadNotas = 0;
+		for (Evaluacion evaluacion : evaluaciones) {
+			for (Double nota : evaluacion.getCalificaciones().values()) {
+				sumaNotas += nota;
+				cantidadNotas++;
+			}
+		}
+	    if (cantidadNotas == 0) {
+	        return 0.0;
+	    }
+
+	    return sumaNotas / cantidadNotas;
+	}
+
+	/**
+	 * Agrega una evaluación a la lista del estudiante.
+	 * 
+	 * @param evaluacion Evaluación a agregar.
+	 */
+	public void agregarEvaluacion(Evaluacion evaluacion) {
+		evaluaciones.add(evaluacion);
+	}
 
 	/**
 	 * Agrega una inscripción a la lista de inscripciones del estudiante si no
