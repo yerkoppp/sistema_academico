@@ -17,11 +17,23 @@ import java.util.ArrayList;
  * Esta clase mantiene una relación de asociación con la clase Curso.
  */
 public class Docente {
+	/**
+	 * RUT del docente, utilizado como identificador único.
+	 */
 	private String rut;
+	/**
+	 * Nombre completo del docente.
+	 */
 	private String nombre;
+	/**
+	 * Área de especialización del docente (por ejemplo, Matemáticas, Lenguaje).
+	 */
 	private String areaEspecializacion;
-	private ArrayList<Curso> cursosDictados = new ArrayList<>(); // Relación de asociación
-
+	/**
+	 * Lista de cursos que el docente ha dictado.
+	 */
+	private ArrayList<Curso> cursosDictados = new ArrayList<>(); 
+	
 	/**
 	 * Constructor vacío de la clase Docente.
 	 */
