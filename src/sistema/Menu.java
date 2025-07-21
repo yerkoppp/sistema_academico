@@ -1,13 +1,37 @@
+/**
+ * 
+ * @author Yerko Osorio
+ * @author Luis Guevara
+ * @author Jhoseph Quiroga
+ * @author Norma Armijo
+ * @version 1.0
+ */
 package sistema;
 
 import java.util.InputMismatchException;
 
+/**
+ * Clase encargada de mostrar y gestionar los menús de interacción del sistema
+ * académico.
+ * 
+ * Ofrece opciones principales, submenús de registros, gestiones y
+ * consultas/reportes. Permite también capturar la opción seleccionada por el
+ * usuario.
+ */
 public class Menu {
 
+	/**
+	 * Constructor por defecto de la clase Menu.
+	 */
 	public Menu() {
-		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Solicita al usuario que ingrese una opción del menú.
+	 * 
+	 * @return Número entero correspondiente a la opción seleccionada. Retorna
+	 *         -1000 si hay error de entrada.
+	 */
 	public static int opcion() {
 		try {
 			System.out.println("\nIngrese el número de la opción seleccionada");
@@ -22,6 +46,9 @@ public class Menu {
 
 	}
 
+	/**
+	 * Muestra el menú principal con las opciones generales del sistema.
+	 */
 	public void mostrarMenu() {
 		int numeroOpcion = 1;
 		System.out.println("\n" + "-".repeat(22) + " Menú " + "-".repeat(22));
@@ -31,6 +58,10 @@ public class Menu {
 		System.out.printf("(%d) Salir.\n", numeroOpcion++);
 	}
 
+	/**
+	 * Muestra el submenú correspondiente a las opciones de registro:
+	 * estudiantes, docentes y cursos.
+	 */
 	public void mostrarSubmenuRegistros() {
 		int numeroOpcion = 1;
 		System.out.println(
@@ -42,6 +73,10 @@ public class Menu {
 
 	}
 
+	/**
+	 * Muestra el submenú correspondiente a la gestión de inscripciones y
+	 * evaluaciones.
+	 */
 	public void mostrarSubmenuGestiones() {
 		int numeroOpcion = 1;
 		System.out.println(
@@ -53,6 +88,10 @@ public class Menu {
 
 	}
 
+	/**
+	 * Muestra el submenú de consultas y reportes: listas de estudiantes,
+	 * calificaciones, cursos destacados, y docentes con mayor carga.
+	 */
 	public void mostrarSubmenuConsultas() {
 		int numeroOpcion = 1;
 		System.out.println("\n" + "-".repeat(22) + " Consultas y Reportes "
@@ -64,8 +103,7 @@ public class Menu {
 				numeroOpcion++);
 		System.out.printf("(%d) Mostrar cursos con promedios más altos.\n",
 				numeroOpcion++);
-		System.out.printf(
-				"(%d) Mostrar docentes con mayor carga académica.\n",
+		System.out.printf("(%d) Mostrar docentes con mayor carga académica.\n",
 				numeroOpcion++);
 		System.out.printf("(%d) Mostrar todos los cursos disponibles.\n",
 				numeroOpcion++);

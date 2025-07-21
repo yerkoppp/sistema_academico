@@ -144,13 +144,12 @@ public class Evaluacion {
 		return suma / calificaciones.size();
 	}
 
-	@Override
-
 	/**
 	 * Devuelve una representación en texto de la evaluación.
 	 * 
 	 * @return Cadena con los datos principales de la evaluación.
 	 */
+	@Override
 	public String toString() {
 		return "Evaluacion{" + "tipo='" + tipo + '\'' + ", fecha='" + fecha
 				+ '\'' + ", puntajeMaximo=" + puntajeMaximo

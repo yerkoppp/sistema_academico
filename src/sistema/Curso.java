@@ -175,14 +175,13 @@ public class Curso {
 		return evaluacion.getPromedioGeneral(); // Usa el método ya implementado en Evaluacion
 	}
 
-	@Override
-	
 	/**
 	 * Retorna una representación en forma de texto del curso,
 	 * incluyendo código, nombre, créditos, docente y estudiantes inscritos.
 	 *
 	 * @return Representación del curso como cadena de texto.
 	 */
+	@Override
 	public String toString() {
 		return "--------------------\nCódigo = " + codigo + ",\nNombre =" + nombre + "\nCréditos = " + numCreditos
 				+ "\nDocente = " + docenteAsignado + "\nEstudiantesInscritos = " + estudiantesInscritos

@@ -150,11 +150,11 @@ public class Estudiante {
 				cantidadNotas++;
 			}
 		}
-	    if (cantidadNotas == 0) {
-	        return 0.0;
-	    }
+		if (cantidadNotas == 0) {
+			return 0.0;
+		}
 
-	    return sumaNotas / cantidadNotas;
+		return sumaNotas / cantidadNotas;
 	}
 
 	/**
@@ -181,13 +181,12 @@ public class Estudiante {
 		}
 	}
 
-	@Override
-
 	/**
 	 * Retorna una representación textual del estudiante.
 	 * 
 	 * @return Cadena con nombre, RUT, carrera y año de ingreso.
 	 */
+	@Override
 	public String toString() {
 		return String.format(
 				"Nombre: %s, RUT: %s, Carrera: %s, Año de ingreso: %d",

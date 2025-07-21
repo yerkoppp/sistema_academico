@@ -14,28 +14,32 @@ import java.util.ArrayList;
 /**
  * Clase utilizada para cargar datos de prueba en el sistema académico.
  * 
- * Esta clase inicializa y agrega docentes, estudiantes, cursos,
- * inscripciones y evaluaciones con calificaciones de ejemplo.
+ * Esta clase inicializa y agrega docentes, estudiantes, cursos, inscripciones y
+ * evaluaciones con calificaciones de ejemplo.
  * 
- * Se utiliza para poblar el sistema con información inicial útil para pruebas y demostraciones.
+ * Se utiliza para poblar el sistema con información inicial útil para pruebas y
+ * demostraciones.
  */
 public class DatosPrueba {
 
 	/**
 	 * Constructor que carga datos de prueba en las listas proporcionadas.
 	 *
-	 * @param cursos Lista de cursos del sistema.
-	 * @param docentes Lista de docentes del sistema.
-	 * @param estudiantes Lista de estudiantes del sistema.
+	 * @param cursos        Lista de cursos del sistema.
+	 * @param docentes      Lista de docentes del sistema.
+	 * @param estudiantes   Lista de estudiantes del sistema.
 	 * @param inscripciones Lista de inscripciones del sistema.
 	 */
-	public DatosPrueba(ArrayList<Curso> cursos, ArrayList<Docente> docentes, ArrayList<Estudiante> estudiantes,
+	public DatosPrueba(ArrayList<Curso> cursos, ArrayList<Docente> docentes,
+			ArrayList<Estudiante> estudiantes,
 			ArrayList<Inscripcion> inscripciones) {
 		// 1. Crear instancia del SistemaAcademico
 		SistemaAcademico sistemaAcademico = new SistemaAcademico();
 		// 2. Crear y registrar Docentes
-		Docente docente1 = new Docente("11111111-1", "Ana Garcia", "Programación");
-		Docente docente2 = new Docente("22222222-2", "Juan Perez", "Bases de Datos");
+		Docente docente1 = new Docente("11111111-1", "Ana Garcia",
+				"Programación");
+		Docente docente2 = new Docente("22222222-2", "Juan Perez",
+				"Bases de Datos");
 		Docente docente3 = new Docente("33333333-3", "Maria Lopez", "Redes");
 
 		docentes.add(docente1);
@@ -43,10 +47,14 @@ public class DatosPrueba {
 		docentes.add(docente3);
 
 		// 3. Crear y registrar Estudiantes
-		Estudiante estudiante1 = new Estudiante("111", "Carlos Rojas", "Ingeniería Informática", 2023);
-		Estudiante estudiante2 = new Estudiante("1111111-4", "Laura Soto", "Diseño Gráfico", 2024);
-		Estudiante estudiante3 = new Estudiante("45678912-3", "Pedro Gómez", "Ingeniería Informática", 2023);
-		Estudiante estudiante4 = new Estudiante("78912345-6", "Sofía Diaz", "Contabilidad", 2024);
+		Estudiante estudiante1 = new Estudiante("111", "Carlos Rojas",
+				"Ingeniería Informática", 2023);
+		Estudiante estudiante2 = new Estudiante("1111111-4", "Laura Soto",
+				"Diseño Gráfico", 2024);
+		Estudiante estudiante3 = new Estudiante("45678912-3", "Pedro Gómez",
+				"Ingeniería Informática", 2023);
+		Estudiante estudiante4 = new Estudiante("78912345-6", "Sofía Diaz",
+				"Contabilidad", 2024);
 
 		estudiantes.add(estudiante1);
 		estudiantes.add(estudiante2);
@@ -54,12 +62,20 @@ public class DatosPrueba {
 		estudiantes.add(estudiante4);
 
 		// 4. Crear y registrar Cursos
-		Curso curso1 = new Curso("PROG101", "Programación Orientada a Objetos", 5, docente1);
-		Curso curso2 = new Curso("BD201", "Modelado de Bases de Datos", 4, docente2);
-		Curso curso3 = new Curso("RED301", "Redes de Computadoras I", 6, docente3);
-		Curso curso4 = new Curso("CONT101", "Contabilidad Básica", 3, docente3); // Docente 3 también dicta este curso
+		Curso curso1 = new Curso("PROG101", "Programación Orientada a Objetos",
+				5, docente1);
+		Curso curso2 = new Curso("BD201", "Modelado de Bases de Datos", 4,
+				docente2);
+		Curso curso3 = new Curso("RED301", "Redes de Computadoras I", 6,
+				docente3);
+		Curso curso4 = new Curso("CONT101", "Contabilidad Básica", 3, docente3); // Docente
+																					// 3
+																					// también
+																					// dicta
+																					// este
+																					// curso
 		Curso curso5 = new Curso("MATT101", "mat", 3, docente2);
-		
+
 		cursos.add(curso1);
 		cursos.add(curso2);
 		cursos.add(curso3);
@@ -68,22 +84,24 @@ public class DatosPrueba {
 
 		// 6. Crear Evaluaciones y asignar calificaciones
 		System.out.println("--- Asignación de Calificaciones ---");
-		Evaluacion evalPOO_Parcial1 = new Evaluacion("Control", "15/05/2025", 7.0);
-		Evaluacion evalBD_ExamenFinal = new Evaluacion("Examen", "20/07/2025", 100.0);
-		Evaluacion evalRedes_Tarea1 = new Evaluacion("Trabajo", "01/06/2025", 10.0);
-		Evaluacion evalContabilidad_Parcial = new Evaluacion("Examen", "10/06/2025", 7.0);
+		Evaluacion evalPOO_Parcial1 = new Evaluacion("Control", "15/05/2025",
+				7.0);
+		Evaluacion evalBD_ExamenFinal = new Evaluacion("Examen", "20/07/2025",
+				100.0);
+		Evaluacion evalRedes_Tarea1 = new Evaluacion("Trabajo", "01/06/2025",
+				10.0);
+		Evaluacion evalContabilidad_Parcial = new Evaluacion("Examen",
+				"10/06/2025", 7.0);
 
 		curso1.agregarEvaluacion(evalPOO_Parcial1);
 		curso2.agregarEvaluacion(evalBD_ExamenFinal);
 		curso3.agregarEvaluacion(evalRedes_Tarea1);
 		curso4.agregarEvaluacion(evalContabilidad_Parcial);
-		
-		sistemaAcademico.asignarCalificacionEvaluacion(estudiante1.getRut(), 
+
+		sistemaAcademico.asignarCalificacionEvaluacion(estudiante1.getRut(),
 				curso1, "PEP1", 7, 6);
-		sistemaAcademico.asignarCalificacionEvaluacion(estudiante1.getRut(), 
+		sistemaAcademico.asignarCalificacionEvaluacion(estudiante1.getRut(),
 				curso1, "PEP2", 7, 3);
-		
-		
 
 		// Asignar calificaciones a Carlos en POO
 		evalPOO_Parcial1.asignarCalificacion(estudiante1, 6.5);
@@ -100,7 +118,8 @@ public class DatosPrueba {
 
 		// Asignar calificaciones a Sofía en Contabilidad
 		evalContabilidad_Parcial.asignarCalificacion(estudiante4, 6.8);
-		System.out.println("Calificaciones asignadas a estudiantes en diversas evaluaciones.");
+		System.out.println(
+				"Calificaciones asignadas a estudiantes en diversas evaluaciones.");
 		System.out.println("\n");
 
 	}
